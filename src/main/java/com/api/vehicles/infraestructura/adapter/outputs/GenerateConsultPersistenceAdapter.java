@@ -1,5 +1,7 @@
 package com.api.vehicles.infraestructura.adapter.outputs;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,8 +46,14 @@ public class GenerateConsultPersistenceAdapter implements GenerateConsultPersist
 			c.setPrice(conf.getPrice());
 			double t1=conf.getPrice()/((conf.getTax1()/100)+1);
 			double t2=t1/((conf.getTax2()/100)+1);
-			c.setPriceTx1(t1);
-			c.setPriceTx2(t2);
+			double p1=conf.getPrice()-t1;
+			double p2=p1-t2;
+			BigDecimal bd = new BigDecimal(p1);
+	        bd = bd.setScale(2, RoundingMode.HALF_UP); // Redondeo a dos decimales
+			c.setPriceTx1(bd.doubleValue());
+			bd = new BigDecimal(p2);
+	        bd = bd.setScale(2, RoundingMode.HALF_UP);
+			c.setPriceTx2(bd.doubleValue());
 			c.setTax1(conf.getTax1());
 			c.setTax2(conf.getTax2());
 			c= consultRepo.save(c);
