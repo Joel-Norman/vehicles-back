@@ -36,7 +36,7 @@ public class ProcessPaymentController {
 	}
 	@GetMapping()
 	public ResponseEntity<Response> processPaymentResponse(@RequestParam int code,@RequestParam String auth,@RequestParam String order){
-		System.out.println(code+" "+ auth+" "+ order);
+		System.out.println(code+" "+ auth+" "+ order);//order en esl nuero de orden-
 		try {
             // Crear el FileWriter
             FileWriter escritor = new FileWriter("respuesta.txt");

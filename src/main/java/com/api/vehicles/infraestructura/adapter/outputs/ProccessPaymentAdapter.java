@@ -32,12 +32,15 @@ public class ProccessPaymentAdapter implements ProccessPaymentPort {
 			ConsultEntity co=consultRepo.findById(id).get();
 			co.setOrderNumber(UUID.randomUUID().toString());
 			consultRepo.save(co);
+			payment.setKey("6698-9262-8294-1175-4118");
 			payment.setOrderNumber(co.getOrderNumber());
 			ConfigurationEntity c=configRepo.findById(1L).get();
 			payment.setAmount(String.valueOf(c.getPrice()));
 			payment.setRedirect("https://coloniaride.com/payment");
 			payment.setCurrency("GTQ");
-			
+			payment.setCapture("1");
+			payment.setSubscription("0");
+			payment.setSubscription("AUTOINFO");
 			HttpHeaders headers =new HttpHeaders();
 	        headers.set("Authorization","bearer "+c.getAccessToken());
 	        headers.set("Accept", "application/json");

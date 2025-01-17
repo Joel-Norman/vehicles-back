@@ -1,6 +1,7 @@
 package com.api.vehicles.domain;
 
 public class GenerarConsulta {
+	Long id;
 	String nit;
 	String placa;
 	String username;
@@ -24,6 +25,12 @@ public class GenerarConsulta {
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	

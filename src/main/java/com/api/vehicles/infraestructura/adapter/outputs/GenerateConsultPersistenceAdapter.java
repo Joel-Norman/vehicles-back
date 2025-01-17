@@ -49,6 +49,7 @@ public class GenerateConsultPersistenceAdapter implements GenerateConsultPersist
 			c.setTax1(conf.getTax1());
 			c.setTax2(conf.getTax2());
 			c= consultRepo.save(c);
+			consult.setId(c.getId());
 			return consult;
 		} catch (Exception e) {
 			e.printStackTrace();

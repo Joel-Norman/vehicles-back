@@ -68,7 +68,7 @@ public class SecurityConfiguration{
 	    		.cors(t -> t.disable())
 	         	.csrf(c->c.disable())
 	         	.authorizeHttpRequests((authorize) -> authorize
-	            .requestMatchers("/login","/register","/inform/**","/consult/**").permitAll()
+	            .requestMatchers("/login","/register","/inform/**","/consult/**","/payment/**").permitAll()
 				.anyRequest().authenticated()
 	         	)
 	         	.exceptionHandling(t -> t.authenticationEntryPoint(jwtEntryPoint));
