@@ -37,7 +37,8 @@ public class ListConsultPersistenceAdapter implements ListConsultPersistencePort
 					String.valueOf(t.getInitDate().getDate()),
 					new SimpleDateFormat("EEEE",new Locale("es", "ES")).format(t.getInitDate()),
 					new SimpleDateFormat("HH:mm",new Locale("es", "ES")).format(t.getInitDate()),
-					t.getPaymentDate()!=null
+					t.getPaymentDate()!=null,
+					t.getInitDate()
 					)).toList();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -58,7 +59,8 @@ public class ListConsultPersistenceAdapter implements ListConsultPersistencePort
 					String.valueOf(t.getInitDate().getDate()),
 					new SimpleDateFormat("EEEE",new Locale("es", "ES")).format(t.getInitDate()),
 					new SimpleDateFormat("HH:mm",new Locale("es", "ES")).format(t.getInitDate()),
-					t.getPaymentDate()!=null
+					t.getPaymentDate()!=null,
+							t.getInitDate()
 					)).toList();
 		} catch (Exception e) {
 			// TODO: handle exception

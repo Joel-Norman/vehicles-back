@@ -1,5 +1,7 @@
 package com.api.vehicles.domain;
 
+import java.util.Date;
+
 public class Consult {
 	final Long id;
     final String nit;
@@ -11,10 +13,10 @@ public class Consult {
     final String diaSemana;  // Nuevo campo: día de la semana
     final String hora; 
     boolean pagado;
-	
+	Date date;
 	
 	public Consult(Long id, String nit, String placa, String status, String inform, String mes, String fecha,
-			String diaSemana, String hora,boolean pagado) {
+			String diaSemana, String hora,boolean pagado,Date date) {
 		super();
 		this.id = id;
 		this.nit = nit;
@@ -26,6 +28,7 @@ public class Consult {
 		this.diaSemana = diaSemana;
 		this.hora = hora;
 		this.pagado = pagado;
+		this.date=date;
 	}
 	public Long getId() {
 		return id;
@@ -34,6 +37,12 @@ public class Consult {
 		return nit;
 	}
 	
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
 	public boolean isPagado() {
 		return pagado;
 	}
