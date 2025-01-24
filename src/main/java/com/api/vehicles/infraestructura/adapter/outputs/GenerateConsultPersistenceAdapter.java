@@ -47,7 +47,7 @@ public class GenerateConsultPersistenceAdapter implements GenerateConsultPersist
 			double t1=conf.getPrice()/((conf.getTax1()/100)+1);
 			double t2=t1/((conf.getTax2()/100)+1);
 			double p1=conf.getPrice()-t1;
-			double p2=p1-t2;
+			double p2=t1-t2;
 			BigDecimal bd = new BigDecimal(p1);
 	        bd = bd.setScale(2, RoundingMode.HALF_UP); // Redondeo a dos decimales
 			c.setPriceTx1(bd.doubleValue());

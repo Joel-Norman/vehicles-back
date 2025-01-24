@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,10 +33,11 @@ public class ListConsultPersistenceAdapter implements ListConsultPersistencePort
 					t.getPlaca(),
 					t.getStatus(),
 					t.getInform(),
-					new SimpleDateFormat("MMMM").format(t.getInitDate()),
+					new SimpleDateFormat("MMMM",new Locale("es", "ES")).format(t.getInitDate()),
 					String.valueOf(t.getInitDate().getDate()),
-					new SimpleDateFormat("EEEE").format(t.getInitDate()),
-					new SimpleDateFormat("HH:mm").format(t.getInitDate())
+					new SimpleDateFormat("EEEE",new Locale("es", "ES")).format(t.getInitDate()),
+					new SimpleDateFormat("HH:mm",new Locale("es", "ES")).format(t.getInitDate()),
+					t.getPaymentDate()!=null
 					)).toList();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -52,10 +54,11 @@ public class ListConsultPersistenceAdapter implements ListConsultPersistencePort
 					t.getPlaca(),
 					t.getStatus(),
 					t.getInform(),
-					new SimpleDateFormat("MMMM").format(t.getInitDate()),
+					new SimpleDateFormat("MMMM",new Locale("es", "ES")).format(t.getInitDate()),
 					String.valueOf(t.getInitDate().getDate()),
-					new SimpleDateFormat("EEEE").format(t.getInitDate()),
-					new SimpleDateFormat("HH:mm").format(t.getInitDate())
+					new SimpleDateFormat("EEEE",new Locale("es", "ES")).format(t.getInitDate()),
+					new SimpleDateFormat("HH:mm",new Locale("es", "ES")).format(t.getInitDate()),
+					t.getPaymentDate()!=null
 					)).toList();
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -10,10 +10,11 @@ public class Consult {
     final String fecha;      // Nuevo campo: fecha
     final String diaSemana;  // Nuevo campo: día de la semana
     final String hora; 
+    boolean pagado;
 	
 	
 	public Consult(Long id, String nit, String placa, String status, String inform, String mes, String fecha,
-			String diaSemana, String hora) {
+			String diaSemana, String hora,boolean pagado) {
 		super();
 		this.id = id;
 		this.nit = nit;
@@ -24,12 +25,20 @@ public class Consult {
 		this.fecha = fecha;
 		this.diaSemana = diaSemana;
 		this.hora = hora;
+		this.pagado = pagado;
 	}
 	public Long getId() {
 		return id;
 	}
 	public String getNit() {
 		return nit;
+	}
+	
+	public boolean isPagado() {
+		return pagado;
+	}
+	public void setPagado(boolean pagado) {
+		this.pagado = pagado;
 	}
 	public String getPlaca() {
 		return placa;
