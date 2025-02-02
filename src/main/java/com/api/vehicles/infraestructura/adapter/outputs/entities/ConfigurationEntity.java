@@ -1,5 +1,8 @@
 package com.api.vehicles.infraestructura.adapter.outputs.entities;
 
+import java.util.Date;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,9 +13,14 @@ public class ConfigurationEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
+	@Column(length = 550)
 	String accessToken;
 	String tokenType;
 	String expiresIn;
+	String apiKey;
+	String apiUser;
+	String apiPassword;
+	Date expireDate;
 	double tax1;
 	double tax2;
 	double price;
@@ -23,6 +31,25 @@ public class ConfigurationEntity {
 	}
 	public Long getId() {
 		return id;
+	}
+	
+	public String getApiKey() {
+		return apiKey;
+	}
+	public void setApiKey(String apiKey) {
+		this.apiKey = apiKey;
+	}
+	public String getApiUser() {
+		return apiUser;
+	}
+	public void setApiUser(String apiUser) {
+		this.apiUser = apiUser;
+	}
+	public String getApiPassword() {
+		return apiPassword;
+	}
+	public void setApiPassword(String apiPassword) {
+		this.apiPassword = apiPassword;
 	}
 	public void setId(Long id) {
 		this.id = id;
@@ -38,6 +65,12 @@ public class ConfigurationEntity {
 	}
 	public void setTokenType(String tokenType) {
 		this.tokenType = tokenType;
+	}
+	public Date getExpireDate() {
+		return expireDate;
+	}
+	public void setExpireDate(Date expireDate) {
+		this.expireDate = expireDate;
 	}
 	public String getExpiresIn() {
 		return expiresIn;

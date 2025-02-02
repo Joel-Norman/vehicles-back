@@ -35,7 +35,7 @@ public class UploadInformAdapter implements UploadInformPort {
             return new ResponseEntity(new Response(true,"Informe guardado con exito.",null),HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity(new Response(true,"Ocurrio un error al intentar guardar el informe.",null),HttpStatus.OK);
+            return new ResponseEntity(new Response(false,"Ocurrio un error al intentar guardar el informe.",null),HttpStatus.OK);
         }
 	}
 

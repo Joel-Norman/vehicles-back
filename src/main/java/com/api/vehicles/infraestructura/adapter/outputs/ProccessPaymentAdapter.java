@@ -2,6 +2,8 @@ package com.api.vehicles.infraestructura.adapter.outputs;
 
 
 
+import java.time.Instant;
+import java.util.Date;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ import org.springframework.web.client.RestTemplate;
 
 import com.api.vehicles.aplication.ports.outputs.ProccessPaymentPort;
 import com.api.vehicles.domain.ProcessPayment;
+import com.api.vehicles.domain.RequestLogin;
+import com.api.vehicles.domain.ResponseLogin;
 import com.api.vehicles.domain.ResponsePayment;
 import com.api.vehicles.infraestructura.adapter.outputs.entities.ConfigurationEntity;
 import com.api.vehicles.infraestructura.adapter.outputs.entities.ConsultEntity;
@@ -29,12 +33,16 @@ public class ProccessPaymentAdapter implements ProccessPaymentPort {
 	@Override
 	public ResponsePayment processPaymentApi(ProcessPayment payment,Long id) {
 		try {
+			ConfigurationEntity c=configRepo.findById(1L).get();
+			if(c.getExpireDate()==null ||c.getExpireDate().before(new Date())) {
+				loginApi(c);
+			}
 			ConsultEntity co=consultRepo.findById(id).get();
 			co.setOrderNumber(UUID.randomUUID().toString());
 			consultRepo.save(co);
-			payment.setKey("6698-9262-8294-1175-4118");
+			payment.setKey(c.getApiKey());
 			payment.setOrderNumber(co.getOrderNumber());
-			ConfigurationEntity c=configRepo.findById(1L).get();
+			
 			payment.setAmount(String.valueOf(c.getPrice()));
 			payment.setRedirect("https://coloniaride.com/payment");
 			payment.setCurrency("GTQ");
@@ -70,6 +78,22 @@ Response response = client.newCall(request).execute();
 		} catch (HttpClientErrorException e) {
 			e.printStackTrace();
 			return null;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public void loginApi(ConfigurationEntity c) throws Exception {
+		try {
+			ResponseLogin l=restTemplate.postForEntity("https://app.tilopay.com/api/v1/login", new RequestLogin(c.getApiUser(), c.getApiPassword()),ResponseLogin.class).getBody();
+			c.setAccessToken(l.getAccessToken());
+			c.setExpireDate(Date.from(Instant.now().plusSeconds(l.getExpiresIn()-3600)));
+			c.setExpiresIn(l.getExpiresIn()+"");
+			c=configRepo.save(c);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		}
 	}
 
