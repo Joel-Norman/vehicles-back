@@ -90,6 +90,9 @@ Response response = client.newCall(request).execute();
 			c.setAccessToken(l.getAccessToken());
 			c.setExpireDate(Date.from(Instant.now().plusSeconds(l.getExpiresIn()-3600)));
 			c.setExpiresIn(l.getExpiresIn()+"");
+			System.out.println(l.getAccessToken());
+			System.out.println(l.getExpiresIn());
+			System.out.println(l.getTokenType());
 			c=configRepo.save(c);
 		} catch (Exception e) {
 			e.printStackTrace();
